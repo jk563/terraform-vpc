@@ -18,12 +18,12 @@ variable "enable_public_subnets" {
 
 variable "enable_nat_subnets" {
   type = bool
-  description = "Whether to create public subnets"
+  description = "Whether to create nat subnets"
   default = false
 }
 
 variable "enable_private_subnets" {
   type = bool
-  description = "Whether to create public subnets"
+  description = "Whether to create private subnets"
   default = true
 }
