@@ -25,5 +25,5 @@ variable "enable_nat_subnets" {
 variable "enable_private_subnets" {
   type = bool
   description = "Whether to create private subnets"
-  default = true
+  default = false
 }
