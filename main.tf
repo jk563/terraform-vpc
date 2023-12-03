@@ -47,7 +47,7 @@ resource "aws_subnet" "public" {
 }
 
 output "public_subnet_ids" {
-  value = values(aws_subnet.private)[*].id
+  value = values(aws_subnet.public)[*].id
   description = "Public Subnet IDs"
 }
 
