@@ -2,6 +2,29 @@ resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr
 }
 
+resource "aws_security_group" "public" {
+  count = var.enable_public_subnets ? 1 : 0
+
+  vpc_id = aws_vpc.main.id
+}
+
+output "public_sg" {
+  value = var.enable_public_subnets ? aws_security_group.public[0].id : ""
+  description = "Public Subnet IDs"
+}
+
+resource "aws_security_group_rule" "public_egress" {
+  count = var.enable_public_subnets ? 1 : 0
+
+  type = "egress"
+  cidr_blocks = ["0.0.0.0/0"]
+  description = "Allow internet egress"
+  from_port = 0
+  to_port = 65535
+  protocol = "all"
+  security_group_id = aws_security_group.public[0].id
+}
+
 resource "aws_internet_gateway" "main" {
   count = var.enable_public_subnets ? 1 : 0
 
